@@ -1,0 +1,66 @@
+package com.demo.controller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.demo.binding.User;
+import com.demo.entity.UserEntity;
+import com.demo.repo.UserRepository;
+
+@Controller
+public class UserController {
+	@Autowired
+	private UserRepository repo;
+
+	// method to load student form
+	//http://localhost:8087/
+	@GetMapping("/")
+	public String loadForm(Model model) {
+		loadFormData(model);
+		return "index";
+	}
+	private void loadFormData(Model model) {
+		User user=new User();
+		model.addAttribute("user", user);
+	}
+	@PostMapping("/save")
+	public String handleSubmit(User u, Model model) {
+
+		// logic to save
+
+		UserEntity entity = new UserEntity();
+
+		// copy data from binding obj to entity obj
+		BeanUtils.copyProperties(u, entity);
+		
+		repo.save(entity);
+
+		model.addAttribute("msg", "User Saved");
+
+		loadFormData(model);
+
+		return "index";
+	}
+
+	// method to display saved students data
+	//http://localhost:8087/viewStudents
+	@GetMapping("/viewTask")
+	public String getUserssData(Model model) {
+		
+		// logic to fetch and send students data
+		
+		List<UserEntity> usersList = repo.findAll();
+		
+		model.addAttribute("user", usersList);
+		
+		return "data";
+	}
+}

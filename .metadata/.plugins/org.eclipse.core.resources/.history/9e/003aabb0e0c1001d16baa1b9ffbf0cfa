@@ -1,0 +1,60 @@
+package com.demo.binding;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+public class Task {
+	private Integer tid;
+	
+	private String name;
+	
+	@CreationTimestamp
+	private LocalDate Date;
+	
+	private LocalTime timing;
+
+	public Integer getTid() {
+		return tid;
+	}
+
+	public void setTid(Integer tid) {
+		this.tid = tid;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	
+
+	public LocalDate getDate() {
+		return Date;
+	}
+
+	public void setDate(LocalDate date) {
+		Date = date;
+	}
+
+	public LocalTime getTiming() {
+		return timing;
+	}
+
+	public void setTiming(LocalTime timing) {
+		this.timing = timing;
+	}
+
+	@Override
+	public String toString() {
+		return "Task [tid=" + tid + ", name=" + name + ", Date=" + Date + ", timing=" + timing + "]";
+	}
+
+	
+	
+}

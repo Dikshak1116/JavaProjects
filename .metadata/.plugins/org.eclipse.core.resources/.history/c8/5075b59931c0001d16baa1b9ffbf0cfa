@@ -1,0 +1,54 @@
+package com.demo.controller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.demo.entity.UserEntity;
+import com.demo.repo.UserRepository;
+
+@Controller
+public class UserController {
+	@Autowired
+	private UserRepository repo;
+
+	// method to load student form
+	//http://localhost:8087/
+	@GetMapping("/")
+	public String loadForm(Model model) {
+		loadFormData(model);
+		return "index";
+	}
+	private void loadFormData(Model model) {
+		
+		UserEntity user=new UserEntity();
+		model.addAttribute("user", user);
+	}
+	
+	@PostMapping("/save")
+	public String handleSubmit(UserEntity user,Model model) {
+		UserEntity entity = new UserEntity();
+		repo.save(entity);
+
+		model.addAttribute("msg", "User Saved");
+		loadFormData(model);
+		return "index";
+	}
+	@GetMapping("/View Task")
+	public String getStudentsData(Model model) {
+		
+		// logic to fetch and send students data
+		
+		List<UserEntity> userList = repo.findAll();
+		
+		model.addAttribute("userlist", userList);
+		
+		return "data";
+	}
+}
