@@ -54,6 +54,7 @@
 					<td><form:input path="endDate" type="date" /></td>
 				</tr>
 				<tr>
+					<td><a href="/" class="btn btn-secondary">Reset</a></td>
 					<td><input type="submit" value="Search"
 						class="btn btn-primary" /></td>
 
@@ -100,7 +101,11 @@
 				</tr>
 				
 				</c:forEach>
-
+				<tr>
+				<c:if test="${empty searches}">
+				<td colspan="12" style="text-align: center">No Record Found</td>
+				</c:if>
+				</tr>
 			</tbody>
 		</table>
 

@@ -2,7 +2,9 @@ package in.ashokit.service;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import in.ashokit.entity.CitizenPlan;
@@ -29,8 +31,27 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public List<CitizenPlan> search(SearchRequest request) {
-		List<CitizenPlan> all = planRepo.findAll();
-		return all;
+		CitizenPlan entity=new CitizenPlan();
+		
+		if(null!=request.getPlanName()&& !"".equals(request.getPlanName())) {
+			entity.setPlanName(request.getPlanName());
+		}
+		if(null!=request.getPlanStatus()&& !"".equals(request.getPlanStatus())) {
+			entity.setPlanStatus(request.getPlanStatus());
+		}
+		if(null!=request.getGender()&& !"".equals(request.getGender())) {
+			entity.setGender(request.getGender());
+		}
+		if(null!=request.getStartDate()&& !"".equals(request.getStartDate())) {
+			entity.setPlanStartDate(request.getStartDate());
+		}
+		if(null!=request.getEndDate()&& !"".equals(request.getEndDate())) {
+			entity.setPlanEndDate(request.getEndDate());
+		}
+			
+		//BeanUtils.copyProperties(request, entity);
+		List<CitizenPlan> filterPlan = planRepo.findAll(Example.of(entity));
+		return filterPlan;
 	}
 
 	@Override
