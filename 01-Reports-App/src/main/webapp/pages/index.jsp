@@ -10,7 +10,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap demo</title>
+<title>Report Application</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -112,7 +112,9 @@
 
 
 		<hr />
-		Export : <a href="">Excel</a> <a href="">Pdf</a>
+		
+		<!--  <p class="text-success">${msg}</p>-->
+		Export : <a href="excel">Excel</a> <a href="pdf">Pdf</a>
 	</div>
 
 	<script

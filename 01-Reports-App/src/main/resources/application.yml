@@ -13,7 +13,18 @@ spring:
     view:
       prefix: /pages/
       suffix: .jsp
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: dikshak1611@gmail.com
+    password: xyqumadufmygugpy
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 server:
   port: 7070
-  
+
     
